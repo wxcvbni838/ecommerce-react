@@ -34,6 +34,7 @@ func Routes(
 		authRouter.POST("/signup", userHandler.SignUp)
 		authRouter.POST("/signin", userHandler.SignIn)
 		authRouter.POST("/signout", authMiddleware, userHandler.SignOut)
+		authRouter.POST("/validate-password", userHandler.ValidatePassword)
 	}
 
 	userRouter := r.Group("/users").Use(authMiddleware)

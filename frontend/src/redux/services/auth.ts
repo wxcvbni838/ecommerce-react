@@ -3,6 +3,18 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 //interfaces
 import { IAuth, SingInRequest } from '@interfaces/user'
 
+export interface PasswordValidationRequest {
+  password: string
+}
+
+export interface PasswordValidationResponse {
+  isValid: boolean
+  strength: number
+  level: string
+  errors: string[]
+  warnings: string[]
+}
+
 export const apiAuth = createApi({
   reducerPath: 'apiAuth',
   baseQuery: fetchBaseQuery({
@@ -42,7 +54,17 @@ export const apiAuth = createApi({
       transformResponse: (response: any) => response.data,
       transformErrorResponse: (error) => error.data,
     }),
+
+    validatePassword: builder.mutation<PasswordValidationResponse, PasswordValidationRequest>({
+      query: (data) => ({
+        url: '/auth/validate-password',
+        method: 'POST',
+        body: data,
+      }),
+      transformResponse: (response: any) => response.data,
+      transformErrorResponse: (error) => error.data,
+    }),
   }),
 })
 
-export const { useSignInMutation, useSignUpMutation, useSignOutMutation } = apiAuth
+export const { useSignInMutation, useSignUpMutation, useSignOutMutation, useValidatePasswordMutation } = apiAuth

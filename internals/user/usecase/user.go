@@ -15,6 +15,7 @@ import (
 	"ecommerce_clean/utils"
 	"errors"
 	"fmt"
+	"strings"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -84,6 +85,12 @@ func (u *UserUseCase) SignIn(ctx context.Context, req *dto.SignInRequest) (strin
 func (u *UserUseCase) SignUp(ctx context.Context, req *dto.SignUpRequest) (string, string, *entity.User, error) {
 	if err := u.validator.ValidateStruct(req); err != nil {
 		return "", "", nil, err
+	}
+
+	passwordPolicy := utils.DefaultPasswordPolicy()
+	passwordResult := passwordPolicy.ValidatePassword(req.Password)
+	if !passwordResult.IsValid {
+		return "", "", nil, fmt.Errorf("password validation failed: %s", strings.Join(passwordResult.Errors, "; "))
 	}
 
 	var avatarUrlUpload = ""
