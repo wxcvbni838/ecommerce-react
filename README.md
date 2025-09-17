@@ -19,6 +19,7 @@ Welcome to the **Ecommerce React** repository! This project showcases an ecommer
 ## Features
 
 - User authentication with JWT
+- **Strong password policy** with real-time validation
 - Product management
 - Shopping cart functionality
 - Order processing
@@ -93,14 +94,42 @@ Now you can access the application at `http://localhost:3000`.
 Once the application is running, you can explore the following features:
 
 - **User Registration and Login**: Create an account or log in to your existing account.
+- **Password Security**: Strong password policy with real-time validation and strength meter.
 - **Browse Products**: View the available products in the store.
 - **Add to Cart**: Add products to your shopping cart for purchase.
 - **Checkout**: Complete your purchase through a secure checkout process.
 - **Admin Dashboard**: If you log in as an admin, you can manage products and view orders.
 
+### Password Policy Requirements
+
+The application enforces a strong password policy to ensure user account security:
+
+- **Minimum Length**: 8 characters
+- **Maximum Length**: 128 characters
+- **Uppercase Letters**: At least one uppercase letter (A-Z)
+- **Lowercase Letters**: At least one lowercase letter (a-z)
+- **Numbers**: At least one digit (0-9)
+- **Special Characters**: At least one special character (!@#$%^&*()_+-=[]{}|;':",./<>?~`)
+- **Forbidden Words**: Cannot contain common words like "password", "123456", "qwerty", "admin", "user", "test"
+- **Pattern Detection**: Detects and warns against common patterns and repeated characters
+
+The password strength meter provides real-time feedback with color-coded indicators:
+- 🔴 **Very Weak** (0-19): Red
+- 🟠 **Weak** (20-39): Orange  
+- 🟡 **Fair** (40-59): Yellow
+- 🔵 **Good** (60-79): Blue
+- 🟢 **Strong** (80-89): Green
+- 💚 **Very Strong** (90-100): Emerald
+
 ## API Documentation
 
 For detailed API documentation, you can refer to the Swagger UI. Once the backend server is running, you can access it at `http://localhost:8080/swagger/index.html`.
+
+### Password Policy API
+
+- **POST** `/api/v1/auth/validate-password` - Validate password strength
+- **Request**: `{"password": "string"}`
+- **Response**: Password validation result with strength score and requirements
 
 ## Architecture
 

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 //components
 import toast from 'react-hot-toast'
 import Loading from '@components/Loading'
+import PasswordStrengthMeter from '@components/PasswordStrengthMeter'
 
 //interfaces
 import { SignUpRequest } from '@interfaces/user'
@@ -19,6 +20,9 @@ import { FiEye, FiEyeOff } from 'react-icons/fi'
 
 //constants
 import { ERole } from '@constants/enum'
+
+//utils
+import { validatePasswordClient } from '@utils/passwordValidation'
 
 const initForm: SignUpRequest = {
   email: '',
@@ -42,6 +46,13 @@ const SignUp = () => {
   }
 
   const handleRegister = async () => {
+    // Validate password before submitting
+    const passwordValidation = validatePasswordClient(form.password)
+    if (!passwordValidation.isValid) {
+      toast.error('Please fix password requirements before submitting')
+      return
+    }
+
     const formData = new FormData()
     formData.append('email', form.email)
     formData.append('name', form.name)
@@ -156,6 +167,8 @@ const SignUp = () => {
                     {showPassword ? <FiEye width={20} /> : <FiEyeOff width={20} />}
                   </button>
                 </div>
+                {/* Password Strength Meter */}
+                <PasswordStrengthMeter password={form.password} className="mt-2" />
               </div>
 
               <button

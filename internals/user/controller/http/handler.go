@@ -222,3 +222,36 @@ func (h *AuthHandler) DeleteUser(c *gin.Context) {
 
 	response.JSON(c, http.StatusOK, "Delete user successfully")
 }
+
+// @Summary			Validate Password Strength
+// @Description		Validates password strength and returns validation results.
+// @Tags			Auth
+// @Accept			json
+// @Produce			json
+// @Param			request	body	dto.PasswordValidationRequest	true	"Password validation request"
+// @Success			200		{object}	dto.PasswordValidationResponse	"Password validation result"
+// @Failure			400		{object}	response.Response				"Bad Request - Invalid parameters"
+// @Router			/auth/validate-password [post]
+func (h *AuthHandler) ValidatePassword(c *gin.Context) {
+	var req dto.PasswordValidationRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		logger.Error("Failed to get body", err)
+		response.Error(c, http.StatusBadRequest, err, "Invalid parameters")
+		return
+	}
+
+	passwordPolicy := utils.DefaultPasswordPolicy()
+	passwordResult := passwordPolicy.ValidatePassword(req.Password)
+	strength := passwordPolicy.GetPasswordStrength(req.Password)
+	level := passwordPolicy.GetPasswordStrengthText(strength)
+
+	res := dto.PasswordValidationResponse{
+		IsValid:  passwordResult.IsValid,
+		Strength: strength,
+		Level:    level,
+		Errors:   passwordResult.Errors,
+		Warnings: passwordResult.Warnings,
+	}
+
+	response.JSON(c, http.StatusOK, res)
+}
